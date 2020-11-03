@@ -1,4 +1,4 @@
 develop:
-	zola serve
+	zola serve & yarn watch
 
-.PHONY: serve
+.PHONY: develop
