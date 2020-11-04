@@ -1,5 +1,6 @@
 # The URL the site will be built for
 base_url = "https://blog.example.com"
+title = "Stuck In Queues"
 
 # Whether to compile posts to produce an RSS feed
 compile_rss = true
@@ -16,3 +17,9 @@ build_search_index = false
 
 [extra]
 # Put all your custom variables here
+2020_11_blog_tawhidhannan_menu = [
+    {url = "$BASE_URL/about", name = "about"},
+    {url = "$BASE_URL/archive", name = "archive"},
+    {url = "$BASE_URL/contact", name = "contact"},
+    {url = "$BASE_URL/rss.xml", name = "RSS"}
+]

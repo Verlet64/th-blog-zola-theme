@@ -10,6 +10,9 @@ demo = ""
 # be merged with user data, some kind of prefix or nesting is preferable
 # Use snake_casing to be consistent with the rest of Zola
 [extra]
+2020_11_blog_tawhidhannan_menu = [
+    { url = "$BASE_URL", name = "home"}
+]
 
 # The theme author info: you!
 [author]
