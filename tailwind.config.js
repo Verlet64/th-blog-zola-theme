@@ -12,6 +12,12 @@ module.exports = {
       screens: {
         'light-mode': { raw: '(prefers-color-scheme: light)' },
         'dark-mode': {raw: '(prefers-color-scheme: dark)'}
+      },
+      colors: {
+        'light-heading': '#444444',
+      },
+      backgroundColor: {
+        'light': "#fffff8",
       }
     },
   },
