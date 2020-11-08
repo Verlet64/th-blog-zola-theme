@@ -18,6 +18,15 @@ highlight_theme = "monokai"
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 
+taxonomies = [
+    {name = "tags", paginate_by = 5, rss = true},
+]
+
+[slugify]
+paths = "on"
+taxonomies = "on"
+anchors = "on"
+
 [extra]
 # Put all your custom variables here
 2020_11_blog_tawhidhannan_menu = [
