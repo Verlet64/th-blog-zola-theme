@@ -6,7 +6,7 @@ module.exports = {
   fontFamily: {
     'serif': ['Lora'],
   },
-  purge: [],
+  purge: ["./templates/**/*.html"],
   theme: {
     extend: {
       screens: {
@@ -25,6 +25,9 @@ module.exports = {
     contentBullet: [
       'after',
     ],
+    borderWidth: [
+      'last'
+    ]
   },
   plugins: [
     require('tailwindcss-pseudo-elements'),

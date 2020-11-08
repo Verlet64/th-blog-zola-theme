@@ -10,13 +10,36 @@
     }
 }
 
+.information a {
+    @apply underline;
+}
+
+.markdown p a {
+    @apply underline;
+}
+
+.markdown > p:last-of-type {
+    @apply pb-5 border-b border-black border-opacity-25
+}
+
+.markdown > .footnote-definition > p {
+    @apply inline
+}
+
+.markdown pre [style*="background-color:#3e3d32"] {
+    background-color: #0f03 !important;
+}
 
 .markdown pre {
+    overflow-x: auto;
+    line-height: 0.9;
     @apply rounded-sm p-4
 }
 
 .markdown code {
-    @apply text-sm my-10
+    transform: scale(.5, 1);
+    font-family: Consolas, Monaco, Andale Mono, "Ubuntu Mono", monospace;
+    @apply text-base my-10 leading-none;
 }
 
 .markdown h1 {
