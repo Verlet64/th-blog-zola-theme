@@ -6,6 +6,7 @@ title = "Stuck In Queues"
 compile_rss = true
 generate_feed = true
 feed_filename = "rss.xml"
+feed_limit = 20
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
