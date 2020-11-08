@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
-    <link href="{{get_url(path='styles/styles.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{ get_url(path='styles/styles.css', cachebust=true) | safe }}" rel="stylesheet" type="text/css"/>
     {% block rss %}
       <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
     {% endblock %}
