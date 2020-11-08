@@ -4,6 +4,8 @@ title = "Stuck In Queues"
 
 # Whether to compile posts to produce an RSS feed
 compile_rss = true
+generate_feed = true
+feed_filename = "rss.xml"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
