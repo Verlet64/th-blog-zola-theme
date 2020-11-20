@@ -40,18 +40,18 @@
       {% endfor %}
     {% endif %}
 
-    {% if config.extra.gtag %}
+    {% if config.extra.ga_id %}
       <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-109569572-1');
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', '{{ config.extra.ga_id }}', 'auto');
+        ga('send', 'pageview');
       </script>
+      <script async src='https://www.google-analytics.com/analytics.js'></script>
     {% endif %}
 
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     <link href="{{ get_url(path='styles/styles.css', cachebust=true) }}" rel="stylesheet" type="text/css"/>
-    
+
     {% block rss %}
       <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
     {% endblock %}
