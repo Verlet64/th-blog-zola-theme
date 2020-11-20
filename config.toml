@@ -36,3 +36,7 @@ anchors = "on"
     {url = "$BASE_URL/contact", name = "contact"},
     {url = "$BASE_URL/rss.xml", name = "RSS"}
 ]
+
+favicon_path = "/static/thinking-face.png"
+twitter_account = "@thannan93"
+site_keywords = "thannan, tech, tawhid"

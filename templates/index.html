@@ -2,8 +2,56 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <meta name="twitter:card" content="summary">
+    <meta property="og:type" content="website">
+
+    {% if page.title or section.title %} 
+      <title> {{ page.title | default(value=section.title) }} :: {{ config.title }}</title>
+      <meta property="og:title" content="{{ page.title | default(value=section.title) }}">
+      <meta name="twitter:title" content="{{ page.title | default(value=section.title) }}">
+    {% else %}
+      <title> Page not found :: {{ config.title }} </title>
+    {% endif %}
+
+    {% if page.description or section.description %} 
+      <meta name="description" content="{{ page.description | default(value=section.description) }}">
+      <meta property="og:description" content="{{ page.description | default(value=section.description) }}">
+      <meta name="twitter:description" content="{{ page.description | default(value=section.description) }}">
+    {% endif %}
+
+    {% if config.extra.twitter_account %}
+     <meta name="twitter:creator" content="{{ config.extra.twitter_account }}">
+    {% endif %}
+    
+    {% if page.taxonomies.tags %}
+      <meta name="keywords" content="{{ page.taxonomies.tags | join(sep=", ")}}">
+    {% else %}
+      {% if config.extra.site_keywords %}
+        <meta name="keywords" content="{{ config.extra.site_keywords }}">
+      {% endif %}
+    {% endif %}
+    
+    {% if config.extra.favicon_path %}
+      {% set favicon_path = ".." ~ config.extra.favicon_path %} 
+      <link rel="icon" href="{{ resize_image(path=favicon_path, width=32, height=32) }}" type="image/png">
+      {% for apple_touch_icon_size in [48, 72, 96, 144, 192, 256, 384, 512] %}
+        <link rel="apple-touch-icon" sizes="{{ apple_touch_icon_size }}x{{ apple_touch_icon_size }}" href="{{ resize_image(path=favicon_path, width=apple_touch_icon_size, height=apple_touch_icon_size )}}">
+      {% endfor %}
+    {% endif %}
+
+    {% if config.extra.gtag %}
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-109569572-1');
+      </script>
+    {% endif %}
+
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     <link href="{{ get_url(path='styles/styles.css', cachebust=true) | safe }}" rel="stylesheet" type="text/css"/>
+
     {% block rss %}
       <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
     {% endblock %}
