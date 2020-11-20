@@ -7,6 +7,7 @@
     "tailwindcss-pseudo-elements": "^1.4.0"
   },
   "scripts": {
-    "watch": "parcel watch styles/styles.css --out-dir static/styles --no-hmr --no-source-maps"
+    "develop": "parcel watch styles/styles.css --out-dir static --no-hmr --no-source-maps",
+    "build:prod": "parcel build styles/styles.css --out-dir static --no-source-maps"
   }
 }
