@@ -11,13 +11,15 @@ module.exports = {
     extend: {
       screens: {
         'light-mode': { raw: '(prefers-color-scheme: light)' },
-        'dark-mode': {raw: '(prefers-color-scheme: dark)'}
+        'dark-mode': { raw: '(prefers-color-scheme: dark)' }
       },
       textColor: {
-        'light-primary': '#444444'
+        'light-primary': '#444444',
+        'dark-primary': '#eaeaea'
       },
       backgroundColor: {
         'light': "#fffff8",
+        'dark': "#2c3039"
       }
     },
   },
