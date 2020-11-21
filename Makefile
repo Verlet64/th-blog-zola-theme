@@ -5,6 +5,6 @@ build:
 	yarn build:prod && zola build
 
 install: 
-	cp static/styles.css ../../static/styles.css
+	mv static/styles.css ../../static/styles.css
 
 .PHONY: develop build install
