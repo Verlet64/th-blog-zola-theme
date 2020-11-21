@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" style="overflow-y: scroll">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
@@ -57,7 +57,7 @@
       <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
     {% endblock %}
   </head>
-  <body class="font-serif light-mode:bg-light dark-mode:bg-dark dark-mode:text-dark-primary light-mode:text-light-primary overflow-y-scroll">
+  <body class="font-serif light-mode:bg-light dark-mode:bg-dark dark-mode:text-dark-primary light-mode:text-light-primary">
     <nav class="border-b w-full text-sm md:hidden light-mode:border-black dark-mode:border-white">
       <div class="w-full">
         <a class="text-xl text-center" href="{{ config.base_url }}">
