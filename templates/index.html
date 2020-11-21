@@ -45,6 +45,7 @@
         window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
         ga('create', '{{ config.extra.ga_id }}', 'auto');
         ga('send', 'pageview');
+        ga('set', 'anonymizeIp', {{ config.extra.ga_anonymize_ip | default(value=true) }})
       </script>
       <script async src='https://www.google-analytics.com/analytics.js'></script>
     {% endif %}
