@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-y: scroll">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <meta name="twitter:card" content="summary">
+    <meta property="og:type" content="website">
+
+    {% if page.title or section.title %} 
+      <title> {{ page.title | default(value=section.title) }} :: {{ config.title }}</title>
+      <meta property="og:title" content="{{ page.title | default(value=section.title) }}">
+      <meta name="twitter:title" content="{{ page.title | default(value=section.title) }}">
+    {% else %}
+      <title> Page not found :: {{ config.title }} </title>
+    {% endif %}
+
+    {% if page.description or section.description %} 
+      <meta name="description" content="{{ page.description | default(value=section.description) }}">
+      <meta property="og:description" content="{{ page.description | default(value=section.description) }}">
+      <meta name="twitter:description" content="{{ page.description | default(value=section.description) }}">
+    {% endif %}
+
+    {% if config.extra.twitter_account %}
+     <meta name="twitter:creator" content="{{ config.extra.twitter_account }}">
+    {% endif %}
+    
+    {% if page.taxonomies.tags %}
+      <meta name="keywords" content="{{ page.taxonomies.tags | join(sep=", ")}}">
+    {% else %}
+      {% if config.extra.site_keywords %}
+        <meta name="keywords" content="{{ config.extra.site_keywords }}">
+      {% endif %}
+    {% endif %}
+    
+    {% if config.extra.favicon_path %}
+      {% set favicon_path = ".." ~ config.extra.favicon_path %} 
+      <link rel="icon" href="{{ resize_image(path=favicon_path, width=32, height=32) }}" type="image/png">
+      {% for apple_touch_icon_size in [48, 72, 96, 144, 192, 256, 384, 512] %}
+        <link rel="apple-touch-icon" sizes="{{ apple_touch_icon_size }}x{{ apple_touch_icon_size }}" href="{{ resize_image(path=favicon_path, width=apple_touch_icon_size, height=apple_touch_icon_size )}}">
+      {% endfor %}
+    {% endif %}
+
+    {% if config.extra.ga_id %}
+      <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', '{{ config.extra.ga_id }}', 'auto');
+        ga('send', 'pageview');
+        ga('set', 'anonymizeIp', {{ config.extra.ga_anonymize_ip | default(value=true) }})
+      </script>
+      <script async src='https://www.google-analytics.com/analytics.js'></script>
+    {% endif %}
+
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link href="{{ get_url(path='styles.css', cachebust=true) }}" rel="stylesheet" type="text/css"/>
+
+    {% block head %}
+    {% endblock %}
+
+    {% block rss %}
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
+    {% endblock %}
+  </head>
+  <body class="font-serif light-mode:bg-light dark-mode:bg-dark dark-mode:text-dark-primary light-mode:text-light-primary">
+    <nav class="border-b w-full text-sm md:hidden light-mode:border-black dark-mode:border-white">
+      <div class="w-full">
+        <a class="text-xl text-center" href="{{ config.base_url }}">
+          <span class="capitalize block">{{ config.title }}</span>
+        </a>
+      </div>
+      <div class="w-full text-center space-x-3">
+        {% for item in config.extra.2020_11_blog_tawhidhannan_menu %}
+          {% if item.name == "RSS" %}
+            <a rel="alternate" type="application/rss+xml"  itemprop="url" class="text-base" href="{{ item.url | safe | replace(from="$BASE_URL", to=config.base_url) }}">
+              <span itemprop="name" class="capitalize">{{ item.name }}</span>
+            </a>
+          {% else %}
+            <a itemprop="url" class="text-base" href="{{ item.url | safe | replace(from="$BASE_URL", to=config.base_url) }}">
+              <span itemprop="name" class="capitalize">{{ item.name }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </nav>
+    <nav class="justify-items-stretch border-b text-sm hidden w-full md:flex md:text-xl light-mode:border-black dark-mode:border-white">
+      <div class="lg:w-2/5 lg:justify-self-center"></div>
+      <div class="flex w-full max-w-2xl lg:w-1/3">
+        <a class="justify-self-start m-1 self-center md:text-3xl" href="{{ config.base_url }}">
+          <span class="capitalize">{{ config.title }}</span>
+        </a>
+        <div class="flex-grow"></div>
+          {% for item in config.extra.2020_11_blog_tawhidhannan_menu %}
+          <a itemprop="url" class="justify-self-end m-1 self-center" href="{{ item.url | safe | replace(from="$BASE_URL", to=config.base_url) }}">
+            <span itemprop="name" class="capitalize">{{ item.name }}</span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="lg:w-2/5 lg:justify-self-center"> </div>
+    </div>
+    </nav>
+    <main class="flex">
+      <div class="lg:w-2/5 lg:justify-self-center"></div>
+      <div class="w-full p-3 max-w-2xl lg:w-1/3 lg:justify-self-center lg:p-2 space-y-5">
+        {% block title %} 
+        {% endblock title %}
+        {% block content %}
+        {% endblock content %}
+      </div>
+      <div class="lg:w-2/5 lg:justify-self-center"></div>
+    </main>
+  </body>
+</html>
