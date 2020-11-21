@@ -53,6 +53,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     <link href="{{ get_url(path='styles.css', cachebust=true) }}" rel="stylesheet" type="text/css"/>
 
+    {% if config.extra.webmention_endpoint %}
+      <link rel="webmention" href="{{ config.extra.webmention_endpoint }}" />
+    {% endif %}
+
+    {% if config.extra.pingback_endpoint %}
+      <link rel="pingback" href="{{ config.extra.pingback_endpoint }}" />
+    {% endif %}
+
     {% block head %}
     {% endblock %}
 
