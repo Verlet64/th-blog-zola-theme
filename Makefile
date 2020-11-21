@@ -1,7 +1,10 @@
 develop:
-	zola serve & yarn watch
+	zola serve & yarn develop
+
+build:
+	yarn build:prod && zola build
 
 install: 
-	yarn build:prod && zola build && cp static/styles.css ../../static/styles.css
+	cp static/styles.css ../../static/styles.css
 
-.PHONY: develop install
+.PHONY: develop build install
