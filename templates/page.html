@@ -1,27 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <article itemscope itemtype="http://schema.org/BlogPosting">
+    <article itemscope itemtype="http://schema.org/BlogPosting" class="h-entry">
         <header>
-            <h1 class="text-2xl md:text-3xl"itemprop="headline">{{ page.title }}</h1>
+            <a class="text-2xl md:text-3xl u-url u-uid p-name" href="{{ current_url }}" itemprop="headline">{{ page.title }}</a>
         </header>
         <div class="space-y-1 my-3">
         <li class="list-none text-md">
+            <address>
+                <a class="inline-block h-card" href="https://twitter.com/thannan93">Tawhid Hannan</a>
+            </address>
             <a class="after:content-bullet inline-block" href="https://twitter.com/intent/tweet?url={{ page.permalink }}&amp;text={{page.title}} @thannan93">Retweet</a>
-            <h5 class="after:content-bullet inline-block">Created October 29, 2019</h5>
-            <h5 class="inline-block">Last Updated April 28, 2020</h5>
+            <h5 class="after:content-bullet inline-block">Created <time class="dt-published" datetime="{{ page.date | date(format="%+") }}"> {{ page.date | date(format="%d %B, %Y") }} </time></h5>
+            <h5 class="inline-block dt-updated">Last Updated <time class="dt-updated" datetime="{{ page.date | date(format="%+") }}">{{ page.date | date(format="%d %B, %Y") }}</time></h5>
         </li>
         {% if page.taxonomies.tags %}
             Tags: <ul class="inline">
                 {% for tag in page.taxonomies.tags %}
-                <li class="inline"><a class="underline" href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">#{{ tag }}</a></li>
+                <li class="inline"><a class="underline p-category" href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}">#{{ tag }}</a></li>
                 {% endfor %}
             </ul>
         {% endif %}
         </div>
-        <div class="text-lg text-justify markdown space-y-3" itemprop="articleBody">
+        <div class="text-lg text-justify markdown space-y-3 e-content" itemprop="articleBody">
           {{ page.content | safe }}
         </div>
-        
     </article>
 {% endblock content %}

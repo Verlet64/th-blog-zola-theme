@@ -11,21 +11,25 @@
 
 {% block content %}
 {% if paginator %}
-  {% for post in paginator.pages %}
-  <div class="">
-    <span>{{post.date}}</span>
-    <h1><a class="text-lg md:text-2xl"href="{{ post.permalink }}">{{ post.title }}</a></h1>
-    <div class="space-y-1">{{ post.summary | safe }}</div>  
-  </div>
-  {% endfor %}
-  <div class="text-center w-full">
-    {% if paginator.previous %}
-      <a href="{{ paginator.previous }}">&#9666</a>
+  <div class="h-feed">
+    {% for post in paginator.pages %}
+    <div class="h-entry space-y-5">
+      <div class="">
+        <span>{{post.date}}</span>
+        <h1><a class="u-url text-lg md:text-2xl"href="{{ post.permalink }}">{{ post.title }}</a></h1>
+        <div class="space-y-1">{{ post.summary | safe }}</div>  
+      </div>
+      {% endfor %}
+      <div class="text-center w-full">
+        {% if paginator.previous %}
+          <a href="{{ paginator.previous }}">&#9666</a>
+        {% endif %}
+        <span>{{ paginator.current_index }}</span>
+        {% if paginator.next %}
+          <a href="{{ paginator.next }}">&#9656</a>
+        {% endif %}
+      </div>
+    </div>
     {% endif %}
-    <span>{{ paginator.current_index }}</span>
-    {% if paginator.next %}
-      <a href="{{ paginator.next }}">&#9656</a>
-    {% endif %}
   </div>
-{% endif %}
 {% endblock content %}
