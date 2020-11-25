@@ -3,9 +3,16 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
+    <!-- Surface how to display links to this site -->
     <meta name="twitter:card" content="summary">
     <meta property="og:type" content="website">
 
+    <!-- Surface the canonical URL to Opengraph compliant clients -->
+    {% if current_url %}
+      <meta property="og:url" content="{{ current_url }}">
+    {% endif %}
+    
+    <!-- Surfacing the page title to Twitter and OpenGraph compliant clients -->
     {% if page.title or section.title %} 
       <title> {{ page.title | default(value=section.title) }} :: {{ config.title }}</title>
       <meta property="og:title" content="{{ page.title | default(value=section.title) }}">
@@ -14,16 +21,19 @@
       <title> Page not found :: {{ config.title }} </title>
     {% endif %}
 
+    <!-- Surfacing the page descriptions to Twitter and OpenGraph compliant clients -->
     {% if page.description or section.description %} 
       <meta name="description" content="{{ page.description | default(value=section.description) }}">
       <meta property="og:description" content="{{ page.description | default(value=section.description) }}">
       <meta name="twitter:description" content="{{ page.description | default(value=section.description) }}">
     {% endif %}
 
+    <!-- Surface the authors twitter account to twitter -->
     {% if config.extra.twitter_account %}
      <meta name="twitter:creator" content="{{ config.extra.twitter_account }}">
     {% endif %}
     
+    <!-- Surface tags as keywords -->
     {% if page.taxonomies.tags %}
       <meta name="keywords" content="{{ page.taxonomies.tags | join(sep=", ")}}">
     {% else %}
@@ -32,14 +42,17 @@
       {% endif %}
     {% endif %}
     
+    <!-- Favicon/Tile images -->
     {% if config.extra.favicon_path %}
       {% set favicon_path = ".." ~ config.extra.favicon_path %} 
       <link rel="icon" href="{{ resize_image(path=favicon_path, width=32, height=32) }}" type="image/png">
+      <meta property="og:image" sizes="96x96" href="{{ resize_image(path=favicon_path, width=96, height=96 )}}">
       {% for apple_touch_icon_size in [48, 72, 96, 144, 192, 256, 384, 512] %}
         <link rel="apple-touch-icon" sizes="{{ apple_touch_icon_size }}x{{ apple_touch_icon_size }}" href="{{ resize_image(path=favicon_path, width=apple_touch_icon_size, height=apple_touch_icon_size )}}">
       {% endfor %}
     {% endif %}
 
+    <!-- Google Analytics Setup -->
     {% if config.extra.ga_id %}
       <script>
         window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -53,17 +66,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     <link href="{{ get_url(path='styles.css', cachebust=true) }}" rel="stylesheet" type="text/css"/>
 
+    <!-- Webmention Support -->
     {% if config.extra.webmention_endpoint %}
       <link rel="webmention" href="{{ config.extra.webmention_endpoint }}" />
     {% endif %}
 
+    <!-- Pingback Support -->
     {% if config.extra.pingback_endpoint %}
       <link rel="pingback" href="{{ config.extra.pingback_endpoint }}" />
     {% endif %}
 
+    <!-- <head /> extension point -->
     {% block head %}
     {% endblock %}
 
+    <!-- RSS feed for page -->
     {% block rss %}
       <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
     {% endblock %}
