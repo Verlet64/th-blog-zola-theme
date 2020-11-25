@@ -1,4 +1,4 @@
 <p class="p-summary">
-{{ body }}
+{{ body | markdown(inline=true) | safe }}
 <!-- more -->
 </p>
