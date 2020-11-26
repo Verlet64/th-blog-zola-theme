@@ -1,7 +1,35 @@
 {% extends "base.html" %}
 
-{% block title %}
+{% block head_title %}
+    <title>{{ term.name | replace(from="-", to=" ") | capitalize }}</title>
+{% endblock head_title %}
+
+{% block body_title %}
     <div class="text-center text-2xl md:text-3xl">
         Tagged With: #{{ term.name }}
     </div>
-{% endblock title%}
+{% endblock body_title%}
+
+{% block content %}
+{% if paginator %}
+    <div class="h-feed space-y-5">
+      {% for post in paginator.pages %}
+      <div class="h-entry">
+        <div>
+          <span>{{post.date}}</span>
+          <h1><a class="u-url text-xl md:text-2xl"href="{{ post.permalink }}">{{ post.title }}</a></h1>
+        </div>    
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center w-full">
+      {% if paginator.previous %}
+        <a href="{{ paginator.previous }}">&#9666</a>
+      {% endif %}
+      <span>{{ paginator.current_index }}</span>
+      {% if paginator.next %}
+        <a href="{{ paginator.next }}">&#9656</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock content %}
